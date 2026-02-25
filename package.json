@@ -1,0 +1,44 @@
+{
+  "name": "brandomica",
+  "version": "1.0.0",
+  "description": "CLI tool for Brandomica Lab brand name verification",
+  "type": "module",
+  "bin": {
+    "brandomica": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "brandomica",
+    "brand",
+    "domain",
+    "trademark",
+    "cli"
+  ],
+  "author": "Brandomica Lab <hello@brandomica.com> (https://www.brandomica.com)",
+  "homepage": "https://www.brandomica.com/cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BRNDMK/brandomica-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/BRNDMK/brandomica-cli/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "ora": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5",
+    "vitest": "^3.0.0"
+  }
+}

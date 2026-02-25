@@ -1,0 +1,21 @@
+export declare function setPlain(value: boolean): void;
+export declare function isPlain(): boolean;
+export declare const SYM: {
+    readonly ok: string;
+    readonly fail: string;
+    readonly warn: string;
+    readonly info: string;
+    readonly block: string;
+};
+export declare function green(s: string): string;
+export declare function red(s: string): string;
+export declare function yellow(s: string): string;
+export declare function cyan(s: string): string;
+export declare function dim(s: string): string;
+export declare function bold(s: string): string;
+export declare function bgRed(s: string): string;
+export declare function bgYellow(s: string): string;
+export declare function bgGreen(s: string): string;
+export declare function riskColor(risk: "low" | "medium" | "high"): (s: string) => string;
+export declare function riskBadge(risk: "low" | "medium" | "high"): string;
+export declare function availabilitySymbol(available: boolean | null): string;
