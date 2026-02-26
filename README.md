@@ -117,6 +117,13 @@ brandomica check mybrand --json | jq '.safety.blockers | length'
 brandomica safety mybrand || echo "Safety blockers detected"
 ```
 
+## Support
+
+- [GitHub Issues](https://github.com/BRNDMK/brandomica-cli/issues) — bug reports, feature requests
+- Email: [support@brandomica.com](mailto:support@brandomica.com)
+- Security vulnerabilities: [security@brandomica.com](mailto:security@brandomica.com) (private reports only)
+- Security policy: see [`SECURITY.md`](https://github.com/BRNDMK/brandomica-cli/blob/main/SECURITY.md)
+
 ## License
 
 MIT
