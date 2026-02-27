@@ -94,6 +94,18 @@ describe("fetchApi", () => {
     await expect(fetchApi("check-domains", "acme")).rejects.toThrow(ApiError);
     await expect(fetchApi("check-domains", "acme")).rejects.toThrow("429");
   });
+
+  it("throws on network error", async () => {
+    globalThis.fetch = vi.fn().mockRejectedValue(new TypeError("fetch failed"));
+    await expect(fetchApi("check-domains", "acme")).rejects.toThrow("fetch failed");
+  });
+
+  it("throws on abort timeout", async () => {
+    globalThis.fetch = vi.fn().mockRejectedValue(
+      new DOMException("The operation was aborted", "AbortError"),
+    );
+    await expect(fetchApi("check-domains", "acme")).rejects.toThrow("aborted");
+  });
 });
 
 describe("fetchApiPost", () => {
