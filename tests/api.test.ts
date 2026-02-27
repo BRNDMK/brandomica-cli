@@ -69,6 +69,7 @@ describe("fetchApi", () => {
     await fetchApi("check-domains", "acme");
     expect(globalThis.fetch).toHaveBeenCalledWith(
       "https://test.example.com/api/check-domains?name=acme",
+      expect.objectContaining({ signal: expect.any(AbortSignal) }),
     );
   });
 
@@ -80,6 +81,7 @@ describe("fetchApi", () => {
     await fetchApi("check-all", "acme", { mode: "quick" });
     expect(globalThis.fetch).toHaveBeenCalledWith(
       "https://test.example.com/api/check-all?name=acme&mode=quick",
+      expect.objectContaining({ signal: expect.any(AbortSignal) }),
     );
   });
 
@@ -141,6 +143,7 @@ describe("fetchApiRaw", () => {
     await fetchApiRaw("health");
     expect(globalThis.fetch).toHaveBeenCalledWith(
       "https://test.example.com/api/health",
+      expect.objectContaining({ signal: expect.any(AbortSignal) }),
     );
   });
 
@@ -152,6 +155,7 @@ describe("fetchApiRaw", () => {
     await fetchApiRaw("health", { verbose: "true" });
     expect(globalThis.fetch).toHaveBeenCalledWith(
       "https://test.example.com/api/health?verbose=true",
+      expect.objectContaining({ signal: expect.any(AbortSignal) }),
     );
   });
 });

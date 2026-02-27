@@ -31,6 +31,9 @@
     "url": "https://github.com/BRNDMK/brandomica-cli/issues"
   },
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "chalk": "^5.4.1",
     "commander": "^13.1.0",
