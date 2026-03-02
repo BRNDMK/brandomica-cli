@@ -27,7 +27,7 @@ export function formatDomainsTable(domains: DomainResult[]): string {
   for (const d of domains) {
     const sym = availabilitySymbol(d.available);
     const name = padEnd(d.domain, 20);
-    if (d.available) {
+    if (d.available === true) {
       let price = "";
       if (d.purchasePrice != null && d.renewalPrice != null) {
         const minYears = d.minimumRegistrationYears ?? 1;
@@ -43,8 +43,10 @@ export function formatDomainsTable(domains: DomainResult[]): string {
       }
       const fallback = d.provider === "WhoisXML" ? dim(" [WhoisXML]") : "";
       lines.push(`  ${sym} ${green(name)}${price}${fallback}`);
-    } else {
+    } else if (d.available === false) {
       lines.push(`  ${sym} ${red(name)}${dim("  taken")}`);
+    } else {
+      lines.push(`  ${sym} ${yellow(name)}${dim("  unknown")}`);
     }
   }
   return lines.join("\n");

@@ -26,10 +26,13 @@ function formatCompareRow(r: CheckAllResponse): string {
     `  ${bold(r.name.padEnd(20))} Score: ${color(`${r.score.score}/${r.score.maxScore}`)}  Safety: ${riskBadge(r.safety.overallRisk)} ${r.safety.safetyScore}/100`,
   );
 
-  const available = r.domains.filter((d) => d.available).length;
-  const total = r.domains.length;
+  const definiteDomains = r.domains.filter((d) => d.available !== null);
+  const available = definiteDomains.filter((d) => d.available).length;
+  const total = definiteDomains.length;
+  const comStatus = r.domains.find((d) => d.domain.endsWith(".com"))?.available;
+  const comLabel = comStatus === true ? green("yes") : comStatus === false ? red("no") : dim("?");
   lines.push(
-    `    Domains: ${available}/${total} available  .com: ${r.domains.find((d) => d.domain.endsWith(".com"))?.available ? green("yes") : red("no")}`,
+    `    Domains: ${available}/${total} available  .com: ${comLabel}`,
   );
 
   const socialAvail = r.social.filter((s) => s.available === true).length;

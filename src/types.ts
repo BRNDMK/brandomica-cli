@@ -1,6 +1,6 @@
 export interface DomainResult {
   domain: string;
-  available: boolean;
+  available: boolean | null;
   purchasePrice?: number;
   renewalPrice?: number;
   minimumRegistrationYears?: number;
