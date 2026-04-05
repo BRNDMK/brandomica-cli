@@ -1,6 +1,16 @@
+import { readFileSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
 let apiBase = process.env.BRANDOMICA_API_URL || "https://www.brandomica.com";
 
 const FETCH_TIMEOUT_MS = 30_000;
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const { version } = JSON.parse(
+  readFileSync(join(__dirname, "..", "package.json"), "utf-8")
+) as { version: string };
+const UA = `brandomica-cli/${version}`;
 
 export function setApiBase(url: string): void {
   apiBase = url;
@@ -30,7 +40,10 @@ export async function fetchApi(
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
   try {
-    const res = await fetch(url, { signal: controller.signal });
+    const res = await fetch(url, {
+      headers: { "User-Agent": UA },
+      signal: controller.signal,
+    });
     if (!res.ok) {
       const body = await res.text().catch(() => "");
       throw new ApiError(res.status, `API error ${res.status}: ${body}`);
@@ -51,7 +64,7 @@ export async function fetchApiPost(
   try {
     const res = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "User-Agent": UA },
       body: JSON.stringify(body),
       signal: controller.signal,
     });
@@ -74,7 +87,10 @@ export async function fetchApiRaw(
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
   try {
-    const res = await fetch(url, { signal: controller.signal });
+    const res = await fetch(url, {
+      headers: { "User-Agent": UA },
+      signal: controller.signal,
+    });
     if (!res.ok) {
       const body = await res.text().catch(() => "");
       throw new ApiError(res.status, `API error ${res.status}: ${body}`);
